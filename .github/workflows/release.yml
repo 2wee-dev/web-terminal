@@ -21,9 +21,11 @@ jobs:
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             artifact: two_wee_terminal-linux-x86_64
+            rustflags: '-C target-feature=+crt-static'
           - os: ubuntu-latest
             target: aarch64-unknown-linux-gnu
             artifact: two_wee_terminal-linux-arm64
+            rustflags: '-C target-feature=+crt-static'
 
     steps:
       - uses: actions/checkout@v4
@@ -50,6 +52,7 @@ jobs:
       - name: Build
         env:
           CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
+          RUSTFLAGS: ${{ matrix.rustflags }}
         run: cargo build --release --target ${{ matrix.target }}
 
       - name: Rename binary

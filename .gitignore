@@ -1,4 +1,1 @@
-/target
-/frontend/node_modules
-/src/frontend/terminal.js
-/src/frontend/terminal.css
+node_modules/
